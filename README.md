@@ -328,7 +328,7 @@ git commit -m "your message"
 git push
 ```
 
-Use a meaningful commit message (e.g. `Finished Master Exercises 1–3`). Commit and push often.
+Use a meaningful commit message (e.g. `Finished Answering Master Questions 1–3`). Commit and push often.
 
 ![Example git push](img/gitpic7.png)
 
@@ -338,7 +338,7 @@ Submit on [NTU COOL](https://cool.ntu.edu.tw/login/portal) **before the deadline
 
 1. **GitHub repository link** — your fork of **DM2026-Lab1-Exercise**, with your latest work pushed before the deadline. Commits pushed after the deadline will have a **penalty** for the score. The **penalty** formula will be shared to you later on during the semester.
 
-2. **Lab 1 Master Questions (PDF)** — complete the Master Questions document (provided on COOL as a Word template), export to **PDF**, and upload it.
+2. **Lab 1 Master Questions (PDF)** — complete the Master Questions document (provided on the main repository as a Word template), export to **PDF**, and upload it.
 
 3. **Agent conversation logs** — the three encrypted log files from the agentic notebooks (do **not** rename or edit them):
    - `session_logs/agent_dev_session.jsonl.enc`

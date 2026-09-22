@@ -24,11 +24,11 @@ This guide has **two parts**:
 ## System requirements
 
 - **Git** and a **GitHub** account
-- **uv** (installs and manages Python **3.11.0** and the project virtual environment)
+- **uv** (installs and manages Python **3.11.16** and the project virtual environment)
 - **Jupyter** (installed by `uv sync`; use VS Code/Cursor or `jupyter lab` in the browser)
 - [VS Code](https://code.visualstudio.com/download?_exp_download=fb315fc982), [Cursor](https://cursor.com/download), or [Antigravity](https://antigravity.google/download/) (optional but convenient). Click in the links to download and install the software.
 
-The TAs develop and test on **Python 3.11.0**. The announcement repo includes `pyproject.toml`, `uv.lock`, `requirements.txt`, and `.python-version` so your versions match ours.
+The TAs develop and test on **Python 3.11.16**. The announcement repo includes `pyproject.toml`, `uv.lock`, `requirements.txt`, and `.python-version` so your versions match ours.
 
 ---
 
@@ -86,18 +86,18 @@ Replace `<yourpath>` with where you store your files.
 <!-- TODO(image): Terminal showing git clone of DM2026-Lab1-Announcement and cd into the folder -->
 ![Clone the announcement repository](img/PLACEHOLDER_announcement_clone.png)
 
-## A4. Python 3.11.0 and dependencies
+## A4. Python 3.11.16 and dependencies
 
 From the **root** of `DM2026-Lab1-Announcement` (where `pyproject.toml` and `uv.lock` live):
 
 Install the Python interpreter once (uv downloads and manages it):
 
 ```bash
-uv python install 3.11.0
+uv python install 3.11.16
 ```
 
-<!-- TODO(image): uv python install 3.11.0 completing successfully -->
-![Install Python 3.11.0 with uv](img/PLACEHOLDER_uv_python_install.png)
+<!-- TODO(image): uv python install 3.11.16 completing successfully -->
+![Install Python 3.11.16 with uv](img/PLACEHOLDER_uv_python_install.png)
 
 Create the virtual environment and install all packages at the pinned versions:
 
@@ -110,7 +110,7 @@ This creates `.venv` in the project folder and installs everything from `uv.lock
 <!-- TODO(image): uv sync finishing without errors -->
 ![uv sync completed successfully](img/PLACEHOLDER_uv_sync.png)
 
-**Without uv (pip fallback only):** use Python 3.11.0, then from the repo root:
+**Without uv (pip fallback only):** use Python 3.11.16, then from the repo root:
 
 ```bash
 pip install -r requirements.txt
@@ -122,7 +122,7 @@ pip install -r requirements.txt
 uv run python --version
 ```
 
-Expected: `Python 3.11.0` (or another 3.11.x if the patch version differs slightly).
+Expected: `Python 3.11.16` (or another 3.11.x if `uv`'s available builds have moved on since this was written -- `uv python list` shows what it can actually install).
 
 ## A5. API keys (Groq and Google Gemini)
 
@@ -242,7 +242,7 @@ Use Colab **only** if you cannot set up locally. You still need API keys.
 <!-- TODO(image): Colab with repo cloned or folder uploaded -->
 ![Open the project in Google Colab](img/PLACEHOLDER_colab_clone_or_upload.png)
 
-3. Install dependencies (Colab’s Python version may not be 3.11.0):
+3. Install dependencies (Colab’s Python version may not be 3.11.16):
 
    ```python
    !pip install -r requirements.txt
@@ -308,7 +308,7 @@ cd DM2026-Lab1-Exercise
 From the **DM2026-Lab1-Exercise** root (same files as the announcement repo: `pyproject.toml`, `uv.lock`, etc.):
 
 ```bash
-uv python install 3.11.0
+uv python install 3.11.16
 uv sync
 uv run python -m ipykernel install --user --name=dm2026-lab1 --display-name "Python (dm2026-lab1)"
 ```

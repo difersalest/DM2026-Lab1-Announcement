@@ -17,18 +17,18 @@ This guide has **two parts**:
 
 **Where to run the steps:** If the main lab repo is **not** released yet, do Part A in the folder where you cloned **DM2026-Lab1-Announcement**. Once **DM2026-Lab1-Exercise** is available, repeat the environment steps (Python, `uv sync`, API keys, Test-Env) in **that** repo’s root, then continue with Part B.
 
-**How to run the lab:** **Local setup (recommended)** on your laptop with `uv` + Jupyter or VS Code/Cursor/Antigravity. **Google Colab** is a limited fallback for checking packages and API keys only — the **agentic notebooks may require local Jupyter** (chat widgets do not work reliably on Colab).
+**How to run the lab:** **Local setup only** on your laptop with `uv` + Jupyter or VS Code/Cursor/Antigravity. The agentic notebooks require local Jupyter (chat widgets do not work in cloud notebook runtimes).
 
 ---
 
 ## System requirements
 
 - **Git** and a **GitHub** account
-- **uv** (installs and manages Python **3.11.16** and the project virtual environment)
+- **uv** (installs and manages **Python 3.11** and the project virtual environment)
 - **Jupyter** (installed by `uv sync`; use VS Code/Cursor or `jupyter lab` in the browser)
 - [VS Code](https://code.visualstudio.com/download?_exp_download=fb315fc982), [Cursor](https://cursor.com/download), or [Antigravity](https://antigravity.google/download/) (optional but convenient). Click in the links to download and install the software.
 
-The TAs develop and test on **Python 3.11.16**. The announcement repo includes `pyproject.toml`, `uv.lock`, `requirements.txt`, and `.python-version` so your versions match ours.
+The course targets **Python 3.11** (any patch release — the exact build depends on your OS; see `uv python list`). The announcement repo includes `pyproject.toml`, `uv.lock`, `requirements.txt`, and `.python-version` (`3.11`) so **package** versions match ours; you do not need to match a specific patch number.
 
 ---
 
@@ -54,7 +54,7 @@ git config --global user.name "YOUR_USERNAME"
 git config --global user.email "your_email@example.com"
 ```
 
-![Git global configuration example](img/pic6ann1.png)
+![Git global configuration example](img/git_init_config.png)
 
 If you prefer a GUI, [GitHub Desktop](https://desktop.github.com/) works too.
 
@@ -81,23 +81,34 @@ git clone https://github.com/difersalest/DM2026-Lab1-Announcement.git
 cd DM2026-Lab1-Announcement
 ```
 
-Replace `<yourpath>` with where you store your files.
 
-<!-- TODO(image): Terminal showing git clone of DM2026-Lab1-Announcement and cd into the folder -->
-![Clone the announcement repository](img/PLACEHOLDER_announcement_clone.png)
 
-## A4. Python 3.11.16 and dependencies
+![Clone the announcement repository](img/git_clone_announcement.png)
 
-From the **root** of `DM2026-Lab1-Announcement` (where `pyproject.toml` and `uv.lock` live):
+## A4. Python 3.11 and dependencies
 
-Install the Python interpreter once (uv downloads and manages it):
+From the **root** of `DM2026-Lab1-Announcement` (where `pyproject.toml`, `uv.lock`, and `.python-version` live):
+
+Install a **3.11** interpreter once (uv downloads and manages it; the patch version is chosen for your platform):
 
 ```bash
-uv python install 3.11.16
+uv python install 3.11
 ```
 
-<!-- TODO(image): uv python install 3.11.16 completing successfully -->
-![Install Python 3.11.16 with uv](img/PLACEHOLDER_uv_python_install.png)
+To see which 3.11 builds uv can install on your machine:
+
+```bash
+uv python list | findstr 3.11
+```
+
+On macOS/Linux, use `grep` instead of `findstr`:
+
+```bash
+uv python list | grep 3.11
+```
+
+
+![Install Python 3.11 with uv](img/install_uv_python.png)
 
 Create the virtual environment and install all packages at the pinned versions:
 
@@ -105,12 +116,12 @@ Create the virtual environment and install all packages at the pinned versions:
 uv sync
 ```
 
-This creates `.venv` in the project folder and installs everything from `uv.lock`. **Let it finish with no errors** before opening any notebook. A partial install often breaks later notebooks (especially `ipywidgets` for the agent chat).
+`uv sync` reads `.python-version` (`3.11`) and uses the 3.11 interpreter you installed above. This creates `.venv` in the project folder and installs everything from `uv.lock`. **Let it finish with no errors** before opening any notebook. A partial install often breaks later notebooks (especially `ipywidgets` for the agent chat).
 
-<!-- TODO(image): uv sync finishing without errors -->
-![uv sync completed successfully](img/PLACEHOLDER_uv_sync.png)
 
-**Without uv (pip fallback only):** use Python 3.11.16, then from the repo root:
+![uv sync completed successfully](img/uv_sync.png)
+
+**Without uv (pip fallback only):** use any **Python 3.11.x** on your PATH, then from the repo root:
 
 ```bash
 pip install -r requirements.txt
@@ -122,7 +133,7 @@ pip install -r requirements.txt
 uv run python --version
 ```
 
-Expected: `Python 3.11.16` (or another 3.11.x if `uv`'s available builds have moved on since this was written -- `uv python list` shows what it can actually install).
+Expected: `Python 3.11.x` (the patch number may differ from classmates on another OS — that is fine). It must **not** be 3.10 or 3.12+.
 
 ## A5. API keys (Groq and Google Gemini)
 
@@ -136,8 +147,7 @@ Neither provider requires a payment method for the free tier used in this course
 2. Copy the key immediately — Groq only shows the full key once.
 3. **One Groq key is enough.** Extra Groq keys under the same account do **not** increase your quota.
 
-<!-- TODO(image): Groq console Create API Key (key value hidden) -->
-![Create a Groq API key](img/PLACEHOLDER_groq_api_key.png)
+![Create a Groq API key](img/create_groq_api_key.png)
 
 ### Google Gemini
 
@@ -173,7 +183,7 @@ GOOGLE_API_KEY="your-actual-google-key"
 Do **not** commit `config/.env` or share keys publicly.
 
 <!-- TODO(image): config/.env with keys redacted or blurred -->
-![Example config/.env with keys filled in](img/PLACEHOLDER_env_file.png)
+![Showing config/.env.example with all the fields that could be filled in the final `config/.env`](img/fill_in_api_keys.png)
 
 ## A6. Register the Jupyter kernel
 
@@ -183,9 +193,13 @@ Still in the announcement repo root:
 uv run python -m ipykernel install --user --name=dm2026-lab1 --display-name "Python (dm2026-lab1)"
 ```
 
+![Executing the command to register the Jupyter kernel](img/installing_jupyter_kernel.png)
+
 ## A7. Open notebooks locally
 
 ### VS Code / Cursor
+
+Open the folder of the repository from the `VS Code / Cursor` UI or execute the following commands in the terminal:
 
 ```bash
 cd <path-to-DM2026-Lab1-Announcement>
@@ -194,7 +208,7 @@ code .
 
 Open **`DM2026-Lab1-Test-Env.ipynb`** and choose kernel **Python (dm2026-lab1)** in the top-right corner.
 
-![Select the dm2026-lab1 kernel in VS Code](img/vs_code.png)
+![Select the dm2026-lab1 kernel in VS Code / Cursor](img/opening_test_env_notebook_with_kernel.png)
 
 ### JupyterLab in the browser (recommended over classic Notebook for widgets)
 
@@ -203,11 +217,11 @@ cd <path-to-DM2026-Lab1-Announcement>
 uv run jupyter lab
 ```
 
-![Start JupyterLab from the terminal](img/pic3ann1.png)
+![Start JupyterLab from the terminal](img/run_jupyter_lab.png)
 
 Open **`DM2026-Lab1-Test-Env.ipynb`** and select **Python (dm2026-lab1)** as the kernel.
 
-![Select kernel in JupyterLab](img/pic4ann1.png)
+![Select kernel in JupyterLab](img/jupyter_lab_select_kernel.png)
 
 ## A8. Test your environment
 
@@ -220,51 +234,19 @@ The notebook checks:
 - Groq and/or Gemini API connectivity (using `config/.env`)
 - `ipywidgets` (needed later for the agent chat on **local** Jupyter)
 
-<!-- TODO(image): Test-Env notebook all cells passed -->
-![DM2026-Lab1-Test-Env.ipynb completed successfully](img/PLACEHOLDER_test_env_pass.png)
+The initial notebook provided already shows an example of how a successful environment setup looks like, first open it to take a look at it: 
+![DM2026-Lab1-Test-Env.ipynb example](img/test_env_notebook.png)
+
+Run the cells in order and compare against our checklist if the environment works as expected:
+
+![DM2026-Lab1-Test-Env.ipynb example](img/test_env_checklist.png)
 
 When **DM2026-Lab1-Exercise** is released, run the same notebook again from **that** repo’s root after `uv sync` there.
 
-## A9. Google Colab (limited fallback)
-
-Use Colab **only** if you cannot set up locally. You still need API keys.
-
-**Colab is not supported for the agentic notebooks** (submitted conversation logs come from local runs). Use Colab to practice package imports and API smoke tests if needed.
-
-1. Open [Google Colab](https://colab.research.google.com/).
-2. Upload this repo or clone it in a notebook cell:
-
-   ```python
-   !git clone https://github.com/difersalest/DM2026-Lab1-Announcement.git
-   %cd DM2026-Lab1-Announcement
-   ```
-
-<!-- TODO(image): Colab with repo cloned or folder uploaded -->
-![Open the project in Google Colab](img/PLACEHOLDER_colab_clone_or_upload.png)
-
-3. Install dependencies (Colab’s Python version may not be 3.11.16):
-
-   ```python
-   !pip install -r requirements.txt
-   ```
-
-4. Set API keys via **Secrets** (key icon in the left sidebar): add `GROQ_API_KEY` and/or `GOOGLE_API_KEY`, then in a cell:
-
-   ```python
-   import os
-   from google.colab import userdata
-   os.environ["GROQ_API_KEY"] = userdata.get("GROQ_API_KEY")
-   os.environ["GOOGLE_API_KEY"] = userdata.get("GOOGLE_API_KEY")
-   ```
-
-<!-- TODO(image): Colab Secrets with key names visible, values hidden -->
-![Colab Secrets for API keys](img/PLACEHOLDER_colab_secrets.png)
-
-5. Open `DM2026-Lab1-Test-Env.ipynb` from the cloned folder and run cells. The **ipywidgets** cell may fail or look broken on Colab — that is expected; use local Jupyter for the full lab.
-
 ## Troubleshooting (Part A)
 
-- **`uv sync` fails:** read the error, ensure you are in the repo root, try `uv lock` only if a TA tells you to — normally use the provided `uv.lock` as-is.
+- **`uv sync` fails:** read the error, ensure you are in the repo root, run `uv python install 3.11` first, then `uv sync` again; try `uv lock` only if a TA tells you to — normally use the provided `uv.lock` as-is.
+- **Wrong Python version:** run `uv python install 3.11`, delete `.venv` if needed, then `uv sync` from the repo root.
 - **Wrong kernel:** the notebook must use **Python (dm2026-lab1)** from this project’s `.venv` (`uv run jupyter lab` or VS Code with that interpreter).
 - **Chat widget frozen later in the lab:** re-run `uv sync` in the **same** repo you use for notebooks; check `ipywidgets` is installed.
 - **`ModuleNotFoundError: PAMI`:** you are not using the project environment — activate via `uv run` or select the correct kernel.
@@ -283,15 +265,15 @@ The TAs
 
 ## B1. Fork and clone the main lab repo
 
-Go to the main lab repository on GitHub (link on NTU COOL when released), e.g. [DM2026-Lab1-Exercise](https://github.com/leoson-wu/DM2026-Lab1-Exercise).
+Go to the main lab repository on GitHub (link on NTU COOL when released), e.g. [DM2026-Lab1-Exercise](https://github.com/difersalest/DM2026-Lab1-Exercise).
 
 Sign in, click **Fork** to copy it to your account.
 
-![Fork the main lab repository](img/pic9ann1.png)
+![Fork the main lab repository](img/github_exercise_repo.png)
 
 On your fork, click **Code** and copy the HTTPS URL.
 
-![Copy clone URL from your fork](img/gitpic3.png)
+![Copy clone URL from your fork](img/github_copy_link.png)
 
 Clone **your** fork (not the TA’s upstream URL):
 
@@ -301,14 +283,14 @@ git clone <your-fork-url>
 cd DM2026-Lab1-Exercise
 ```
 
-![Example git clone of your fork](img/gitpic4.png)
+![Example git clone of your fork](img/github_exercise_clone.png)
 
 ## B2. Environment in the main repo
 
 From the **DM2026-Lab1-Exercise** root (same files as the announcement repo: `pyproject.toml`, `uv.lock`, etc.):
 
 ```bash
-uv python install 3.11.16
+uv python install 3.11
 uv sync
 uv run python -m ipykernel install --user --name=dm2026-lab1 --display-name "Python (dm2026-lab1)"
 ```
@@ -330,27 +312,55 @@ git push
 
 Use a meaningful commit message (e.g. `Finished Answering Master Questions 1–3`). Commit and push often.
 
-![Example git push](img/gitpic7.png)
+![Example git push](img/github_push_commit.png)
 
 ## B4. Submission (single deadline)
 
 Submit on [NTU COOL](https://cool.ntu.edu.tw/login/portal) **before the deadline: October 19, 11:59 pm (Monday)**. There is **one** Lab 1 submission — include **all** of the following:
 
-1. **GitHub repository link** — your fork of **DM2026-Lab1-Exercise**, with your latest work pushed before the deadline. Commits pushed after the deadline will have a **penalty** for the score. The **penalty** formula will be shared to you later on during the semester.
+1. **GitHub repository link** — Copy and paste the link from your fork of **DM2026-Lab1-Exercise**, with your latest work pushed before the deadline (should include all the files cited below as well). Commits pushed after the deadline will have a **penalty** for the score. The **penalty** formula will be shared to you later on during the semester. 
+2. **A .zip file:** Name the `.zip` file in the following format `{your_name_that_is_used_in_NTU_COOL}_{student_id}_files.zip`, check in NTU Cool how your name appears and use that to name the file in the specified format (e.g. `沙利葉_113065892_files.zip`). 
+   
+   2.1 **The Solved Lab 1 Master Questions Document (PDF)** — complete the Master Questions document (provided on the main repository as a `.docx` word template), export to **PDF**, and upload it. **IMPORTANT NOTE:** Change the name of the PDF in a similar fashion as the `.zip` file `{your_name_that_is_used_in_NTU_COOL}_{student_id}_solved_master_questions.pdf` (e.g. `沙利葉_113065892_solved_master_questions.pdf`). 
 
-2. **Lab 1 Master Questions (PDF)** — complete the Master Questions document (provided on the main repository as a Word template), export to **PDF**, and upload it.
+   2.2 **Agent conversation logs** — the three encrypted log files from the agentic notebooks (do **not** rename or edit them):
+      - `session_logs/agent_dev_session.jsonl.enc`
+      - `session_logs/agent_pipeline_session.jsonl.enc`
+      - `session_logs/homework_session.jsonl.enc`
 
-3. **Agent conversation logs** — the three encrypted log files from the agentic notebooks (do **not** rename or edit them):
-   - `session_logs/agent_dev_session.jsonl.enc`
-   - `session_logs/agent_pipeline_session.jsonl.enc`
-   - `session_logs/homework_session.jsonl.enc`
+   2.3 **AgenticPipeline & Homework Reports** - the two generated markdowns `.md` under the `reports/` folder with the written reports, and the `plots/` folder that the reports will reference to show the images generated by the tools from the agentic pipeline.
+      - `reports/{your_name_that_is_used_in_NTU_COOL}_{student_id}_agentic-pipeline_report.md`
+      - `reports/{your_name_that_is_used_in_NTU_COOL}_{student_id}_homework_report.md`
+      - `plots/` 
 
-![Submission deadline reminder](img/Deadline.png)
+![Submission deadline reminder](img/DM2026_Lab1_Deliverables.png)
 
 On the assignment page, upload or paste each required item in the **Lab 1** section as instructed on NTU COOL.
 
 To copy your GitHub repo link: GitHub → profile → **Your repositories** → your fork → copy the browser URL.
 
-Again, **pushes made after the deadline will have points deducted from the final score according to a penalty formula.**
+## B4. Points Distribution:
 
-Good luck!
+1. **Solved Master Notebook Questions:** 20 pts.
+
+2. **Solved Agent Dev Notebook:** 20 pts, graded from the encrypted conversation logs.
+
+3. **Solved Agentic Pipeline Notebook:** Total 30 pts.
+
+   3.1 **Guiding the Agent in the session:** 20 pts, graded from the encrypted conversation logs.
+
+   3.2 **Agentic Pipeline Markdown Report:** 10 pts.
+
+4. **Solved Homework Notebook:** Total 30 pts.
+
+   4.1 **Guiding the Agent in the session:** 20 pts, graded from the encrypted conversation logs.
+
+   4.2 **Homework Markdown Report:** 10 pts.
+
+**`Total:` 100 pts.**
+
+--- 
+
+Again, as a reminder, **pushes made after the deadline will have points deducted from the final score according to a penalty formula.**
+
+Good luck in the lab!

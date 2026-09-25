@@ -23,7 +23,7 @@ This guide has **two parts**:
 
 ## System requirements
 
-- **Git** and a **GitHub** account
+- **Git** and a **GitHub** account. [Tutorial on Git, GitHub and GitHub Desktop](https://youtu.be/8Dd7KRpKeaE?si=rFDI-PHYcDc5jWAn)
 - **uv** (installs and manages **Python 3.11** and the project virtual environment)
 - **Jupyter** (installed by `uv sync`; use VS Code/Cursor or `jupyter lab` in the browser)
 - [VS Code](https://code.visualstudio.com/download?_exp_download=fb315fc982), [Cursor](https://cursor.com/download), or [Antigravity](https://antigravity.google/download/) (optional but convenient). Click in the links to download and install the software.
@@ -56,7 +56,7 @@ git config --global user.email "your_email@example.com"
 
 ![Git global configuration example](img/git_init_config.png)
 
-If you prefer a GUI, [GitHub Desktop](https://desktop.github.com/) works too.
+If you prefer a GUI (Graphic User Interface), [GitHub Desktop](https://desktop.github.com/) works too. [Check the GitHub Desktop tutorial in this video](https://youtu.be/8Dd7KRpKeaE?si=rFDI-PHYcDc5jWAn)
 
 ## A2. Install uv
 
@@ -339,7 +339,7 @@ On the assignment page, upload or paste each required item in the **Lab 1** sect
 
 To copy your GitHub repo link: GitHub → profile → **Your repositories** → your fork → copy the browser URL.
 
-## B4. Points Distribution:
+## B5. Points Distribution:
 
 1. **Solved Master Notebook Questions:** 20 pts.
 

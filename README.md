@@ -345,19 +345,19 @@ To copy your GitHub repo link: GitHub → profile → **Your repositories** → 
 
 ## B5. Points Distribution:
 
-1. **Solved Master Notebook Questions:** 20 pts.
+1. **Solved Master Notebook Questions:** 40 pts.
 
-2. **Solved Agent Dev Notebook:** 20 pts, graded from the encrypted conversation logs.
+2. **Solved Agent Dev Notebook:** 15 pts, graded from the encrypted conversation logs.
 
-3. **Solved Agentic Pipeline Notebook:** Total 30 pts.
+3. **Solved Agentic Pipeline Notebook:** Total 20 pts.
 
-   3.1 **Guiding the Agent in the session:** 20 pts, graded from the encrypted conversation logs.
+   3.1 **Guiding the Agent in the session:** 15 pts, graded from the encrypted conversation logs.
 
-   3.2 **Agentic Pipeline Markdown Report:** 10 pts.
+   3.2 **Agentic Pipeline Markdown Report:** 5 pts.
 
-4. **Solved Homework Notebook:** Total 30 pts.
+4. **Solved Homework Notebook:** Total 25 pts.
 
-   4.1 **Guiding the Agent in the session:** 20 pts, graded from the encrypted conversation logs.
+   4.1 **Guiding the Agent in the session:** 15 pts, graded from the encrypted conversation logs.
 
    4.2 **Homework Markdown Report:** 10 pts.
 

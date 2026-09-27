@@ -269,7 +269,7 @@ The TAs
 
 ## B1. Fork and clone the main lab repo
 
-Go to the main lab repository on GitHub (link on NTU COOL when released), e.g. [DM2026-Lab1-Exercise](https://github.com/difersalest/DM2026-Lab1-Exercise).
+Go to the main lab repository on GitHub (link on NTU COOL when released starting **September 28 (Monday)** at **9:00 AM**), e.g. [DM2026-Lab1-Exercise](https://github.com/difersalest/DM2026-Lab1-Exercise).
 
 Sign in, click **Fork** to copy it to your account.
 

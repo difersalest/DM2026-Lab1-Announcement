@@ -1,4 +1,4 @@
-# [DM2026] Lab 1 – Environment Setup
+# [ISA5810 DM2026] Lab 1 – Environment Setup
 
 Hi everyone,
 
@@ -25,7 +25,7 @@ This guide has **two parts**:
 
 - **Git** and a **GitHub** account. [Tutorial on Git, GitHub and GitHub Desktop](https://youtu.be/8Dd7KRpKeaE?si=rFDI-PHYcDc5jWAn)
 - **uv** (installs and manages **Python 3.11** and the project virtual environment)
-- **Jupyter** (installed by `uv sync`; use VS Code/Cursor or `jupyter lab` in the browser)
+- **Jupyter** (installed by `uv sync`; use VS Code/Cursor/Antigravity or `jupyter lab` in the browser). **IMPORTANT NOTE:** Using `Jupyter Lab` for the `Agentic Section` of the lab is extremely recommended over some bugs that have been observed with VS Code / Cursor / Antigravity when running the widget to chat with the agent.
 - [VS Code](https://code.visualstudio.com/download?_exp_download=fb315fc982), [Cursor](https://cursor.com/download), or [Antigravity](https://antigravity.google/download/) (optional but convenient). Click in the links to download and install the software.
 
 The course targets **Python 3.11** (any patch release — the exact build depends on your OS; see `uv python list`). The announcement repo includes `pyproject.toml`, `uv.lock`, `requirements.txt`, and `.python-version` (`3.11`) so **package** versions match ours; you do not need to match a specific patch number.
@@ -197,9 +197,11 @@ uv run python -m ipykernel install --user --name=dm2026-lab1 --display-name "Pyt
 
 ## A7. Open notebooks locally
 
-### VS Code / Cursor
+### VS Code / Cursor / Antigravity
 
-Open the folder of the repository from the `VS Code / Cursor` UI or execute the following commands in the terminal:
+**IMPORTANT NOTE:** These programs are not so recommended due to some bugs observed in some environments when testing the Agent Chat Widget in the jupyter notebook, so it might also fail in your machine. You can try to use them, but it is under your own risk. `Jupyter Lab` has not presented any issues with the widget, so it is recommended to use it over this.
+
+Open the folder of the repository from the `VS Code / Cursor / Antigravity` UI or execute the following commands in the terminal:
 
 ```bash
 cd <path-to-DM2026-Lab1-Announcement>
@@ -211,6 +213,8 @@ Open **`DM2026-Lab1-Test-Env.ipynb`** and choose kernel **Python (dm2026-lab1)**
 ![Select the dm2026-lab1 kernel in VS Code / Cursor](img/opening_test_env_notebook_with_kernel.png)
 
 ### JupyterLab in the browser (recommended over classic Notebook for widgets)
+
+**IMPORTANT NOTE:** Using `Jupyter Lab` for the `Agentic Section` of the lab is extremely recommended over some bugs that have been observed with VS Code / Cursor / Antigravity when running the widget to chat with the agent.
 
 ```bash
 cd <path-to-DM2026-Lab1-Announcement>
